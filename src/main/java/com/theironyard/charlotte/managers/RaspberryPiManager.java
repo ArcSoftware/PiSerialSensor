@@ -1,4 +1,4 @@
-package com.theironyard.charlotte;
+package com.theironyard.charlotte.managers;
 
 
 import com.pi4j.io.gpio.*;

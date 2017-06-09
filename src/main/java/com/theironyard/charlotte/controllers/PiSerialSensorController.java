@@ -1,11 +1,11 @@
-package com.theironyard.charlotte;
+package com.theironyard.charlotte.controllers;
 
+import com.theironyard.charlotte.managers.RaspberryPiManager;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-/**
- * Created by Jake on 6/9/17.
- */
+@Controller
 public class PiSerialSensorController {
     private RaspberryPiManager piManager;
 
