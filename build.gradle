@@ -26,7 +26,8 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-mustache')
 	compile('org.springframework.boot:spring-boot-starter-web')
-	compile('com.pi4j:pi4j-core:1.1')
+    compile('org.rxtx:rxtx:2.1.7')
+    compile('com.pi4j:pi4j-core:1.1')
 	runtime('org.springframework.boot:spring-boot-devtools')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
