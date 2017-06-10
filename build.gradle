@@ -29,5 +29,6 @@ dependencies {
     compile('org.rxtx:rxtx:2.1.7')
     compile('com.pi4j:pi4j-core:1.1')
 	runtime('org.springframework.boot:spring-boot-devtools')
+    runtime('com.h2database:h2')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }

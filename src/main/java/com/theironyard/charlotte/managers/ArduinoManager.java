@@ -10,8 +10,7 @@ import java.io.OutputStream;
 
 public class ArduinoManager {
 
-
-    public void connect() throws Exception {
+    public void connect(String arg, int i) throws Exception {
         String portName = "ttyUSB0";
         int portSpeed = 9600;
 
