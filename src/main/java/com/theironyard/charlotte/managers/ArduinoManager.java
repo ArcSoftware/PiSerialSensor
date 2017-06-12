@@ -18,15 +18,15 @@ public class ArduinoManager {
 
         CommPortIdentifier portIdentifier = null;
 
-//        try {
-//            portIdentifier = CommPortIdentifier.getPortIdentifier(portName);
-//        } catch (gnu.io.NoSuchPortException e) {
-//            System.out.println("Port not found, listing available ports...");
-//            java.util.Enumeration<CommPortIdentifier> portEnum = CommPortIdentifier.getPortIdentifiers();
-//            while (portEnum.hasMoreElements())
-//                System.out.println(portEnum.nextElement().getName());
-//            System.exit(1);
-//        }
+        try {
+            portIdentifier = CommPortIdentifier.getPortIdentifier(portName);
+        } catch (gnu.io.NoSuchPortException e) {
+            System.out.println("Port not found, listing available ports...");
+            java.util.Enumeration<CommPortIdentifier> portEnum = CommPortIdentifier.getPortIdentifiers();
+            while (portEnum.hasMoreElements())
+                System.out.println(portEnum.nextElement().getName());
+            System.exit(1);
+        }
 
         if (portIdentifier.isCurrentlyOwned()) {
             System.out.println("Error: Port is currently in use");
