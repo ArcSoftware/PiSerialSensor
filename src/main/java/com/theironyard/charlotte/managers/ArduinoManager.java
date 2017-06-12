@@ -11,7 +11,7 @@ import java.io.OutputStream;
 public class ArduinoManager {
 
     public void connect(String arg, int i) throws Exception {
-        String portName = "ttyUSB0";
+        String portName = "/dev/ttyUSB0";
         int portSpeed = 9600;
 
         System.out.println("Connecting to " + portName + " at " + portSpeed + " baud");
