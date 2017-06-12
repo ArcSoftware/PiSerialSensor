@@ -60,15 +60,23 @@ public class ArduinoManager {
         public void run() {
             byte[] buffer = new byte[1024];
             int len = -1;
-            String readings;
+            String weight;
+            Integer readings;
             try {
                 while ((len = this.in.read(buffer)) > -1) {
                     // issue post request after you get the string value
                     // of the currently depressed thing.
-                    readings = new String(buffer, 0, len);
-                    System.out.print(readings);
-                    if (readings.equalsIgnoreCase("0")) {
+                    weight = new String(buffer, 0, len);
+                    readings = Integer.valueOf(weight);
+                    System.out.println(readings);
+                    if (readings.equals(0)) {
                         System.out.println("No weight on sensor");
+                    } else if (readings >= 1 && readings <= 100) {
+                        System.out.println("Low");
+                    } else if (readings >= 101 && readings <= 200) {
+                    System.out.println("Mid");
+                    } else if (readings >= 201) {
+                        System.out.println("Full");
                     }
                 }
             } catch (IOException e) {
