@@ -60,14 +60,14 @@ public class ArduinoManager {
         public void run() {
             byte[] buffer = new byte[1024];
             int len = -1;
-            Integer readings;
+            String readings;
             try {
                 while ((len = this.in.read(buffer)) > -1) {
                     // issue post request after you get the string value
                     // of the currently depressed thing.
-                    readings = Integer.valueOf(new String(buffer, 0, len));
+                    readings = new String(buffer, 0, len);
                     System.out.print(readings);
-                    if (readings == 0) {
+                    if (readings.equalsIgnoreCase("0")) {
                         System.out.println("No weight on sensor");
                     }
                 }
