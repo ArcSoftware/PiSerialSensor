@@ -64,8 +64,11 @@ public class ArduinoManager {
                 while ((len = this.in.read(buffer)) > -1) {
                     // issue post request after you get the string value
                     // of the currently depressed thing.
-                    System.out.println(len + "This is the Len");
-                    System.out.print(new String(buffer, 0, len));
+                    Integer readings = Integer.valueOf(new String(buffer, 0, len));
+                    System.out.print(readings);
+                    if (readings == 0) {
+                        System.out.println("No weight on sensor");
+                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();
