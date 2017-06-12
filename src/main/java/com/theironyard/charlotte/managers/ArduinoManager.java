@@ -10,7 +10,7 @@ import java.io.OutputStream;
 
 public class ArduinoManager {
 
-    public void connect(String arg, int i) throws Exception {
+    public static void connect() throws Exception {
         String portName = "/dev/ttyUSB0";
         int portSpeed = 9600;
 
@@ -18,20 +18,20 @@ public class ArduinoManager {
 
         CommPortIdentifier portIdentifier = null;
 
-        try {
-            portIdentifier = CommPortIdentifier.getPortIdentifier(portName);
-        } catch (gnu.io.NoSuchPortException e) {
-            System.out.println("Port not found, listing available ports...");
-            java.util.Enumeration<CommPortIdentifier> portEnum = CommPortIdentifier.getPortIdentifiers();
-            while (portEnum.hasMoreElements())
-                System.out.println(portEnum.nextElement().getName());
-            System.exit(1);
-        }
+//        try {
+//            portIdentifier = CommPortIdentifier.getPortIdentifier(portName);
+//        } catch (gnu.io.NoSuchPortException e) {
+//            System.out.println("Port not found, listing available ports...");
+//            java.util.Enumeration<CommPortIdentifier> portEnum = CommPortIdentifier.getPortIdentifiers();
+//            while (portEnum.hasMoreElements())
+//                System.out.println(portEnum.nextElement().getName());
+//            System.exit(1);
+//        }
 
         if (portIdentifier.isCurrentlyOwned()) {
             System.out.println("Error: Port is currently in use");
         } else {
-            CommPort commPort = portIdentifier.open(this.getClass().getName(), 2000);
+            CommPort commPort = portIdentifier.open(ArduinoManager.class.getName(), 2000);
 
             if (commPort instanceof SerialPort) {
                 SerialPort serialPort = (SerialPort) commPort;
@@ -62,6 +62,9 @@ public class ArduinoManager {
             int len = -1;
             try {
                 while ((len = this.in.read(buffer)) > -1) {
+                    // issue post request after you get the string value
+                    // of the currently depressed thing.
+                    System.out.println(len + "This is the Len");
                     System.out.print(new String(buffer, 0, len));
                 }
             } catch (IOException e) {
@@ -89,4 +92,10 @@ public class ArduinoManager {
         }
 
     }
+//    public static String stateCheck(byte[] buffer) {
+//        while (true) {
+//            if (buffer. >= 1 && buffer <= 100)
+//        }
+//
+//    }
 }

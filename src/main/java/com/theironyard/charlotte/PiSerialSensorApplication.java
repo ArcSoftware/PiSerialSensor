@@ -10,17 +10,11 @@ public class PiSerialSensorApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PiSerialSensorApplication.class, args);
 
-		if (args.length != 2) {
-			System.out.println("Usage: ArduRasPi portName portSpeed");
-			System.out.println("Example: ArduRasPi /dev/ttyUSB0 9600");
-			System.exit(1);
-		}
-
-
 		try {
-			(new ArduinoManager()).connect(args[0], Integer.parseInt(args[1]));
+			ArduinoManager.connect();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+	//to run: sudo java -jar -Djava.library.path=/usr/lib/jni PiSerialSensor-0.0.1-SNAPSHOT.jar
 }
