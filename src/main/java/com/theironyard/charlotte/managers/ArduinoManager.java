@@ -86,7 +86,14 @@ public class ArduinoManager {
                     } else if (readings >= 1 && readings <= 100) {
                         ArduinoManager.this.template.postForLocation("https://sharedspace.herokuapp.com/addCoffee",
                                 "post");
-                        System.out.println("Low");
+                        String text = "The coffee is low! Creating a new task to refill it!";
+                        ArduinoManager.this.template.postForLocation(
+                                "https://hooks.slack.com/services/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",
+                                text);
+                        //Need to create a post request for {"text":"Created a new task for coffee"}
+                        //https://hooks.slack.com/services/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
+//                        ArduinoManager.this.template.postForLocation("test", "post", "");
+                        System.out.println("Coffee is low, creating a new task. Sensor reads: " + readings);
                     } else if (readings >= 101 && readings <= 200) {
                     System.out.println("Mid");
                     } else if (readings >= 201) {
