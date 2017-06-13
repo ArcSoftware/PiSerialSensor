@@ -87,9 +87,10 @@ public class ArduinoManager {
                         ArduinoManager.this.template.postForLocation("https://sharedspace.herokuapp.com/addCoffee",
                                 "post");
                         String text = "The coffee is low! Creating a new task to refill it!";
-                        ArduinoManager.this.template.postForLocation(
-                                "https://hooks.slack.com/services/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",
-                                String.class, text);
+//
+//                        ArduinoManager.this.template.postForLocation(
+//                                "https://hooks.slack.com/services/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",
+//                                HttpMethod.POST);
                         //Need to create a post request for {"text":"Created a new task for coffee"}
                         //https://hooks.slack.com/services/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
 //                        ArduinoManager.this.template.postForLocation("test", "post", "");
