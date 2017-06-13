@@ -3,15 +3,21 @@ package com.theironyard.charlotte.managers;
 import gnu.io.CommPort;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Scanner;
 
+@Component
 public class ArduinoManager {
+    @Autowired
+    RestTemplate template;
 
-    public static void connect() throws Exception {
+    public void connect() throws Exception {
         String portName = "/dev/ttyUSB0";
         int portSpeed = 9600;
 
@@ -51,7 +57,7 @@ public class ArduinoManager {
         }
     }
 
-    public static class SerialReader implements Runnable {
+    public class SerialReader implements Runnable {
         InputStream in;
 
         public SerialReader(InputStream in) {
@@ -78,6 +84,8 @@ public class ArduinoManager {
                     if (readings.equals(0)) {
                         System.out.println("No weight on sensor");
                     } else if (readings >= 1 && readings <= 100) {
+                        ArduinoManager.this.template.postForLocation("https://sharedspace.herokuapp.com/addCoffee",
+                                "post");
                         System.out.println("Low");
                     } else if (readings >= 101 && readings <= 200) {
                     System.out.println("Mid");
@@ -91,7 +99,7 @@ public class ArduinoManager {
         }
     }
 
-    public static class SerialWriter implements Runnable {
+    public class SerialWriter implements Runnable {
         OutputStream out;
 
         public SerialWriter(OutputStream out) {
