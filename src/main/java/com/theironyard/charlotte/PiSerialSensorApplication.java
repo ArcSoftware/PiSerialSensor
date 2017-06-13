@@ -4,13 +4,10 @@ import com.theironyard.charlotte.managers.ArduinoManager;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import javax.annotation.PostConstruct;
-
 @SpringBootApplication
 public class PiSerialSensorApplication {
 
-	@PostConstruct
-	public void init(ArduinoManager manager) {
+	public PiSerialSensorApplication(ArduinoManager manager) {
 		try {
 			manager.connect();
 		} catch (Exception e) {
