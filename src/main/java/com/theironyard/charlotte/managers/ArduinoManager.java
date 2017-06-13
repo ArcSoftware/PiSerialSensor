@@ -7,6 +7,7 @@ import gnu.io.SerialPort;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Scanner;
 
 public class ArduinoManager {
 
@@ -62,11 +63,16 @@ public class ArduinoManager {
             int len = -1;
             String weight;
             Integer readings;
+            Scanner sc = new Scanner(in);
+
             try {
-                while ((len = this.in.read(buffer)) > -1) {
+                while (sc.hasNext()) {
+
+//                while ((len = this.in.read(buffer)) > -1) {
                     // issue post request after you get the string value
                     // of the currently depressed thing.
-                    weight = new String(buffer, 0, len);
+//                    weight = new String(buffer, 0, len);
+                    weight = sc.nextLine();
                     readings = Integer.valueOf(weight);
                     System.out.println(readings);
                     if (readings.equals(0)) {
@@ -79,7 +85,7 @@ public class ArduinoManager {
                         System.out.println("Full");
                     }
                 }
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
