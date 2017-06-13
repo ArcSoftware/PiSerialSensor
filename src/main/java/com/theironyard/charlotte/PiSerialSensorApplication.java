@@ -8,18 +8,18 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 public class PiSerialSensorApplication {
+	@Bean
+	public RestTemplate restTemplate() {
+		return new RestTemplate();
+	}
 
-	public PiSerialSensorApplication(ArduinoManager manager) {
+	@Bean
+	public void initializeManager(ArduinoManager manager) {
 		try {
 			manager.connect();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-
-	@Bean
-	public RestTemplate restTemplate() {
-		return new RestTemplate();
 	}
 
 	public static void main(String[] args) {
