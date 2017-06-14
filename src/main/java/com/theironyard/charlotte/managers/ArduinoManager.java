@@ -10,6 +10,8 @@ import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 @Component
@@ -73,7 +75,6 @@ public class ArduinoManager {
 
             try {
                 while (sc.hasNext()) {
-
 //                while ((len = this.in.read(buffer)) > -1) {
                     // issue post request after you get the string value
                     // of the currently depressed thing.
@@ -88,9 +89,17 @@ public class ArduinoManager {
                                 "post");
                         String text = "The coffee is low! Creating a new task to refill it!";
 //
-//                        ArduinoManager.this.template.postForLocation(
-//                                "https://hooks.slack.com/services/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",
-//                                HttpMethod.POST);
+
+                        Map<String, String> map = new HashMap<>();
+
+                        map.put("text", text);
+
+                        ArduinoManager.this.template.postForObject(
+                                "https://hooks.slack.com/services/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",
+                                map,
+                                String.class
+                        );
+
                         //Need to create a post request for {"text":"Created a new task for coffee"}
                         //https://hooks.slack.com/services/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
 //                        ArduinoManager.this.template.postForLocation("test", "post", "");
