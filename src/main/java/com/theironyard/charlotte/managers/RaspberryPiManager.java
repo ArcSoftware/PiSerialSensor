@@ -25,22 +25,18 @@ public class RaspberryPiManager {
         if (color.equalsIgnoreCase("red")) {
             if (duration%2 == 0) {
                 redLED.blink(100, 400);
-                System.out.println(duration);
                 Thread.sleep(400);
             } else {
                 whiteLED.blink(100, 400);
-                System.out.println(duration);
                 Thread.sleep(400);
             }
         }
         else {
             if (duration%2 == 0) {
                 greenLED.blink(100, 400);
-                System.out.println(duration);
                 Thread.sleep(400);
             } else {
                 blueLED.blink(100, 400);
-                System.out.println(duration);
                 Thread.sleep(400);
             }
         }

@@ -93,7 +93,7 @@ public class ArduinoManager {
                         ArduinoManager.this.template.postForObject(
                                 "https://hooks.slack.com/services/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",
                                 map, String.class);
-                        piManager.alert(1000, "red");
+                        piManager.alert(10, "red");
                         System.out.println("Coffee is low, creating a new task. \n Sensor reads: " + readings);
                     } else if (readings >= 201) {
                         String text = "Coffee has been refilled! :parrot:";
@@ -103,7 +103,7 @@ public class ArduinoManager {
                         ArduinoManager.this.template.postForObject(
                                 "https://hooks.slack.com/services/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",
                                 map, String.class);
-                        piManager.alert(1000, "green");
+                        piManager.alert(10, "green");
                         System.out.println("Coffee is now Full");
                     }
                 }
