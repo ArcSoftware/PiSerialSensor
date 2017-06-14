@@ -16,6 +16,12 @@ import java.util.Scanner;
 
 @Component
 public class ArduinoManager {
+    private RaspberryPiManager piManager;
+
+    public ArduinoManager(RaspberryPiManager piManager) {
+        this.piManager = piManager;
+    }
+
     @Autowired
     RestTemplate template;
 
@@ -67,47 +73,38 @@ public class ArduinoManager {
         }
 
         public void run() {
-            byte[] buffer = new byte[1024];
-            int len = -1;
+//            byte[] buffer = new byte[1024];
+//            int len = -1;
             String weight;
             Integer readings;
             Scanner sc = new Scanner(in);
 
             try {
                 while (sc.hasNext()) {
-//                while ((len = this.in.read(buffer)) > -1) {
-                    // issue post request after you get the string value
-                    // of the currently depressed thing.
-//                    weight = new String(buffer, 0, len);
                     weight = sc.nextLine();
                     readings = Integer.valueOf(weight);
-                    System.out.println(readings);
-                    if (readings.equals(0)) {
-                        System.out.println("No weight on sensor");
-                    } else if (readings >= 1 && readings <= 100) {
+                    if (readings >= 1 && readings <= 100) {
                         ArduinoManager.this.template.postForLocation("https://sharedspace.herokuapp.com/addCoffee",
                                 "post");
-                        String text = "The coffee is low! Creating a new task to refill it!";
-//
-
+                        String text = ":coffee: The coffee is low! Creating a new task to refill it!";
                         Map<String, String> map = new HashMap<>();
-
                         map.put("text", text);
 
                         ArduinoManager.this.template.postForObject(
                                 "https://hooks.slack.com/services/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",
-                                map,
-                                String.class
-                        );
-
-                        //Need to create a post request for {"text":"Created a new task for coffee"}
-                        //https://hooks.slack.com/services/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
-//                        ArduinoManager.this.template.postForLocation("test", "post", "");
-                        System.out.println("Coffee is low, creating a new task. Sensor reads: " + readings);
-                    } else if (readings >= 101 && readings <= 200) {
-                    System.out.println("Mid");
+                                map, String.class);
+                        piManager.alert(1000, "red");
+                        System.out.println("Coffee is low, creating a new task. \n Sensor reads: " + readings);
                     } else if (readings >= 201) {
-                        System.out.println("Full");
+                        String text = "Coffee has been refilled! :parrot:";
+                        Map<String, String> map = new HashMap<>();
+                        map.put("text", text);
+
+                        ArduinoManager.this.template.postForObject(
+                                "https://hooks.slack.com/services/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",
+                                map, String.class);
+                        piManager.alert(1000, "green");
+                        System.out.println("Coffee is now Full");
                     }
                 }
             } catch (Exception e) {
