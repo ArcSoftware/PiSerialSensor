@@ -94,7 +94,9 @@ public class ArduinoManager {
                                 "https://hooks.slack.com/services/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",
                                 map, String.class);
                         piManager.alert(10, "red");
+                        piManager.allOff();
                         System.out.println("Coffee is low, creating a new task. \n Sensor reads: " + readings);
+                        Thread.sleep(1000);
                     } else if (readings >= 201) {
                         String text = "Coffee has been refilled! :parrot:";
                         Map<String, String> map = new HashMap<>();
@@ -104,7 +106,9 @@ public class ArduinoManager {
                                 "https://hooks.slack.com/services/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",
                                 map, String.class);
                         piManager.alert(10, "green");
+                        piManager.allOff();
                         System.out.println("Coffee is now Full");
+                        Thread.sleep(1000);
                     }
                 }
             } catch (Exception e) {
