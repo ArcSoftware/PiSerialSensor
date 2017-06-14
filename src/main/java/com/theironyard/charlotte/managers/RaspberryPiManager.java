@@ -48,6 +48,9 @@ public class RaspberryPiManager {
         if (greenLED.isHigh()) {greenLED.toggle();}
         if (blueLED.isHigh()) {blueLED.toggle();}
     }
+    public void lowLED() {
+        if (redLED.isLow()) {redLED.toggle();}
+    }
 
 
 }
