@@ -18,8 +18,8 @@ import java.util.Scanner;
 public class ArduinoManager {
     private RaspberryPiManager piManager;
 
-    public ArduinoManager(RaspberryPiManager piManager) {
-        this.piManager = piManager;
+    public ArduinoManager() {
+        piManager = new RaspberryPiManager();
     }
 
     @Autowired
