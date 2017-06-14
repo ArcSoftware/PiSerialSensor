@@ -96,7 +96,6 @@ public class ArduinoManager {
                         piManager.alert(10, "red");
                         piManager.allOff();
                         System.out.println("Coffee is low, creating a new task. \n Sensor reads: " + readings);
-                        Thread.sleep(1000);
                     } else if (readings >= 201) {
                         String text = "Coffee has been refilled! :parrot:";
                         Map<String, String> map = new HashMap<>();
@@ -108,7 +107,6 @@ public class ArduinoManager {
                         piManager.alert(10, "green");
                         piManager.allOff();
                         System.out.println("Coffee is now Full");
-                        Thread.sleep(1000);
                     }
                 }
             } catch (Exception e) {
