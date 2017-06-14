@@ -85,6 +85,8 @@ public class ArduinoManager {
                         ArduinoManager.this.template.postForLocation("https://sharedspace.herokuapp.com/addCoffee",
                                 "post");
                         String text = ":coffee: The coffee is low! Creating a new task to refill it!";
+                        System.out.println("Coffee is low! \n Creating task, bossing around Slack bot..." +
+                                " \n Current Reading: " + readings);
                         Map<String, String> map = new HashMap<>();
                         map.put("text", text);
 
@@ -92,12 +94,12 @@ public class ArduinoManager {
                                 "https://hooks.slack.com/services/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",
                                 map, String.class);
                         piManager.alert(10, "red");
-                        System.out.println("Coffee is low, creating a new task. \n Sensor reads: " + readings);
-                        Thread.sleep(5000);
                         piManager.lowLED();
                     } else if (readings >= 201) {
                         piManager.allOff();
                         String text = "Coffee has been refilled! :parrot:";
+                        System.out.println("Coffee is now Full. \n Creating task, bossing around Slack bot..." +
+                                "\n Current Reading: " + readings);
                         Map<String, String> map = new HashMap<>();
                         map.put("text", text);
 
@@ -105,9 +107,7 @@ public class ArduinoManager {
                                 "https://hooks.slack.com/services/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",
                                 map, String.class);
                         piManager.alert(10, "green");
-                        Thread.sleep(5000);
                         piManager.allOff();
-                        System.out.println("Coffee is now Full");
                     } else {
                         System.out.println(readings);
                     }
