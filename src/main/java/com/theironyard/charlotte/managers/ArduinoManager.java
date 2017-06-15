@@ -91,7 +91,7 @@ public class ArduinoManager {
                         map.put("text", text);
 
                         ArduinoManager.this.template.postForObject(
-                                "https://hooks.slack.com/services/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",
+                                System.getenv("SLACK_API_URL"),
                                 map, String.class);
                         piManager.alert(10, "red");
                         piManager.lowLED();
@@ -104,7 +104,7 @@ public class ArduinoManager {
                         map.put("text", text);
 
                         ArduinoManager.this.template.postForObject(
-                                "https://hooks.slack.com/services/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",
+                                System.getenv("SLACK_API_URL"),
                                 map, String.class);
                         piManager.alert(10, "green");
                         piManager.allOff();
