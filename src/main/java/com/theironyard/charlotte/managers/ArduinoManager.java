@@ -85,31 +85,11 @@ public class ArduinoManager {
                         ArduinoManager.this.template.postForLocation("https://sharedspace.herokuapp.com/addCoffee",
                                 "post");
                         String text = ":coffee: The coffee is low! Creating a new task to refill it!";
-//                        System.out.println("Coffee is low! \n Creating task, bossing around Slack bot..." +
-//                                " \n Current Reading: " + readings);
                         postRequest(text, "low", readings);
-//                        Map<String, String> map = new HashMap<>();
-//                        map.put("text", text);
-//
-//                        ArduinoManager.this.template.postForObject(
-//                                System.getenv("SLACK_API_URL"),
-//                                map, String.class);
-//                        piManager.alert(10, "red");
-//                        piManager.lowLED();
                     } else if (readings >= 201) {
                         piManager.allOff();
                         String text = "Coffee has been refilled! :parrot:";
-//                        System.out.println("Coffee is now Full. \n Creating task, bossing around Slack bot..." +
-//                                "\n Current Reading: " + readings);
                         postRequest(text, "full", readings);
-//                        Map<String, String> map = new HashMap<>();
-//                        map.put("text", text);
-//
-//                        ArduinoManager.this.template.postForObject(
-//                                System.getenv("SLACK_API_URL"),
-//                                map, String.class);
-//                        piManager.alert(10, "green");
-//                        piManager.allOff();
                     } else if (readings == 0) {
                         System.err.println("No weight on the sensor!");
 
@@ -122,8 +102,9 @@ public class ArduinoManager {
             }
         }
         public void postRequest(String text, String status, Integer readings) throws InterruptedException {
-            System.out.format("Coffee is now %s. \n Creating task, bossing around Slack bot..." +
-                    "\n Current Reading: " + readings + ".\n", status);
+            String taskCreation = status.equalsIgnoreCase("low") ? "Creating Task..." : "";
+            System.out.format("Coffee is now %s. \n Bossing around Slack bot... \n %s" +
+                    "\n Current Reading: " + readings + ".\n", status, taskCreation);
             Map<String, String> map = new HashMap<>();
             map.put("text", text);
 
