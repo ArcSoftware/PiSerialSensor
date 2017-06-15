@@ -13,5 +13,4 @@ public class PiSerialSensorController {
 //    public String home(String led){
 //        return "index";
 //    }
-
 }

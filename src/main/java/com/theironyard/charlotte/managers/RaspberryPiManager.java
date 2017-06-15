@@ -22,35 +22,33 @@ public class RaspberryPiManager {
         if (duration > 0) {
             alert(-- duration, color);
         }
-        if (color.equalsIgnoreCase("red")) {
-            if (duration%2 == 0) {
-                redLED.blink(100, 400);
-                Thread.sleep(400);
+            if (color.equalsIgnoreCase("red")) {
+                if (duration % 2 == 0) {
+                    redLED.blink(100, 400);
+                    Thread.sleep(400);
+                } else {
+                    whiteLED.blink(100, 400);
+                    Thread.sleep(400);
+                }
             } else {
-                whiteLED.blink(100, 400);
-                Thread.sleep(400);
+                if (duration % 2 == 0) {
+                    greenLED.blink(100, 400);
+                    Thread.sleep(400);
+                } else {
+                    blueLED.blink(100, 400);
+                    Thread.sleep(400);
+                }
             }
-        }
-        else {
-            if (duration%2 == 0) {
-                greenLED.blink(100, 400);
-                Thread.sleep(400);
-            } else {
-                blueLED.blink(100, 400);
-                Thread.sleep(400);
-            }
-        }
-
     }
+
     public void allOff() {
         if (whiteLED.isHigh()) {whiteLED.toggle();}
         if (redLED.isHigh()) {redLED.toggle();}
         if (greenLED.isHigh()) {greenLED.toggle();}
         if (blueLED.isHigh()) {blueLED.toggle();}
     }
+
     public void lowLED() {
         if (redLED.isLow()) {redLED.toggle();}
     }
-
-
 }
